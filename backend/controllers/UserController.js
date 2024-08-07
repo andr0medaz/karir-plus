@@ -32,6 +32,20 @@ export const updateUser = async (req, res) => {
   }
 };
 
+export const deleteUser = async (req, res) => {
+  try {
+    const { nik } = req.params;
+    await employee.destroy({
+      where: {
+        nik,
+      },
+    });
+    res.status(200).json({ msg: "User Deleted" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: `Error delete employee data` });
+  }
+};
 
 export const getUsers = async (req, res) => {
   const page = parseInt(req.query.page) || 0;
